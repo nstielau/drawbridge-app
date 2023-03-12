@@ -13,7 +13,7 @@
       <div v-if="isOpen" class="row justify-center">
         <h4>Gate is Open</h4>
       </div>
-      <div v-else class="row">
+      <div v-else class="row justify-center">
         <h4>Gate is Closed</h4>
       </div>
       <div class="row">
