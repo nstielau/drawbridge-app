@@ -3,5 +3,8 @@
   "appName": "Drawbridge",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "url": "http://10.0.0.22:9500"
+  }
 }
