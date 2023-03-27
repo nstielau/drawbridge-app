@@ -10,14 +10,23 @@
       </div>
     </div>
     <div v-else>
-      <div v-if="isOpen" class="row justify-center">
-        <h4>Gate is Open</h4>
+      <div v-if="isOpen" >
+        <div class="row justify-center">
+          <h4>Gate is Open</h4>
+        </div>
+        <div class="row justify-center">
+          <q-btn class="q-ma-lg q-px-lg q-py-md"
+                 :loading="isWaitingResponse"
+                 color="negative"
+                 label="Release hold"
+                 @click="release_hold()"/>
+         </div>
       </div>
       <div v-else class="row justify-center">
         <h4>Gate is Closed</h4>
       </div>
       <div class="row">
-        <q-btn class="q-ma-lg q-px-lg q-py-md" 
+        <q-btn class="q-ma-lg q-px-lg q-py-md"
                :loading="isWaitingResponse"
                color="warning"
                label="Open 1m"
@@ -26,7 +35,7 @@
                :loading="isWaitingResponse"
                color="warning"
                label="Open 10m"
-               @click="open(600)"/>      
+               @click="open(600)"/>
       </div>
       <div class="row">
         <q-btn class="q-ma-lg q-px-lg q-py-md"
@@ -38,7 +47,7 @@
                :loading="isWaitingResponse"
                color="warning"
                label="Open 60m"
-               @click="open(3600)"/>      
+               @click="open(3600)"/>
       </div>
     </div>
   </q-page>
@@ -66,16 +75,16 @@ export default defineComponent({
       this.fqdn = this.$refs.fqdn_input.value;
     },
     getGateStatus() {
-      axios.request('https://' + this.fqdn + '/open', {
+      axios.request('https://' + this.fqdn + '/hold', {
         method: 'GET'
       }).then(response => {
         console.log("Gate is open: ", response.data.connected)
         this.isOpen = response.data.connected;
-      }).catch(error => console.log("Error loading gate", error));
+      }).catch(error => console.log("Error loading gate status", error));
     },
     open(seconds) {
       this.isWaitingResponse = true;
-      axios.request('https://' + this.fqdn + '/open', {
+      axios.request('https://' + this.fqdn + '/hold', {
         method: 'POST',
         data: seconds
       }).then(response => {
@@ -83,7 +92,17 @@ export default defineComponent({
         this.isWaitingResponse = false;
         this.isOpen = true;
       }).catch(error => console.log("Error opening gate", error));
-    } 
+    },
+    release_hold() {
+      this.isWaitingResponse = true;
+      axios.request('https://' + this.fqdn + '/hold', {
+        method: 'DELETE'
+      }).then(response => {
+        console.log("Release hold on gate", response)
+        this.isWaitingResponse = false;
+        this.isOpen = false;
+      }).catch(error => console.log("Error release gate hold", error));
+    }
   }
 })
 </script>
