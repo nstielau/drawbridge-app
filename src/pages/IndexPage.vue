@@ -18,7 +18,7 @@
           <q-btn class="q-ma-lg q-px-lg q-py-md"
                  :loading="isWaitingResponse"
                  color="negative"
-                 label="Release hold"
+                 label="Release gate hold"
                  @click="release_hold()"/>
          </div>
       </div>
