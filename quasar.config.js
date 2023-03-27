@@ -73,7 +73,7 @@ module.exports = configure(function (/* ctx */) {
       // ignorePublicFolder: true,
       // minify: false,
       // polyfillModulePreload: true,
-      distDir: "../nstielau.github.com/drawbridge"
+      distDir: "./dist"
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
