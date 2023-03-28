@@ -95,8 +95,8 @@ export default defineComponent({
     },
     release_hold() {
       this.isWaitingResponse = true;
-      axios.request('https://' + this.fqdn + '/hold', {
-        method: 'DELETE'
+      axios.request('https://' + this.fqdn + '/hold/cancel', {
+        method: 'POST'
       }).then(response => {
         console.log("Release hold on gate", response)
         this.isWaitingResponse = false;
