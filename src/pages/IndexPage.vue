@@ -61,9 +61,16 @@ export default defineComponent({
   name: 'IndexPage',
   data() {
     return {
-      fqdn: localStorage.getItem('fqdn'),
       isWaitingResponse: false,
       isOpen: false
+    }
+  },
+  computed: {
+    fqdn() {
+      if (localStorage.getItem('fqdn')) {
+        return localStorage.getItem('fqdn');
+      }
+      return new URL(window.location).searchParams.get('fqdn')
     }
   },
   mounted() {
@@ -71,8 +78,12 @@ export default defineComponent({
   },
   methods: {
     set_fqdn() {
-      localStorage.setItem('fqdn', this.$refs.fqdn_input.value);
-      this.fqdn = this.$refs.fqdn_input.value;
+      var new_fqdn = this.$refs.fqdn_input.value;
+      try {
+        new_fqdn = new URL(new_fqdn).hostname;
+      } catch {}
+      localStorage.setItem('fqdn', new_fqdn);
+      this.fqdn = new_fqdn;
     },
     getGateStatus() {
       axios.request('https://' + this.fqdn + '/hold', {
