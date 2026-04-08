@@ -1,4 +1,4 @@
-import {execa} from 'execa';
+import { execa } from "execa";
 
-const {stdout} = await execa('echo', ['unicorns']);
+const { stdout } = await execa("echo", ["unicorns"]);
 console.log(stdout);

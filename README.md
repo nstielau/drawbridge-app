@@ -27,6 +27,7 @@ A web-based physical gate opener.
 **Frontend (this repo):** Quasar/Vue 3 SPA that provides the gate control UI. Users configure the backend FQDN, then can check gate status and open it for configurable durations (1, 10, 30, or 60 minutes).
 
 **Backend:** Separate service (not in this repo) that interfaces with the physical gate hardware. Exposes REST API endpoints:
+
 - `GET /hold` - Check current gate status
 - `POST /hold` - Open gate with duration
 - `POST /hold/cancel` - Release gate hold
@@ -36,6 +37,7 @@ A web-based physical gate opener.
 The app can be deployed to:
 
 ### GitHub Pages
+
 Automatically deployed on push to `main` via GitHub Actions.
 
 ### Kubernetes/OpenShift
@@ -56,21 +58,25 @@ kubectl apply -f .
 ## Development
 
 ### Install dependencies
+
 ```bash
 npm install
 ```
 
 ### Start dev server
+
 ```bash
 quasar dev
 ```
 
 ### Build for production
+
 ```bash
 quasar build
 ```
 
 ### Lint and format
+
 ```bash
 npm run lint
 npm run format
@@ -81,5 +87,6 @@ npm run format
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
 
 The `publicPath` is configurable via `PUBLIC_PATH` environment variable:
+
 - Default: `/` (for Kubernetes deployment)
 - GitHub Pages: `/drawbridge-app` (set automatically by deploy script)
