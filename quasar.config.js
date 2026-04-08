@@ -66,7 +66,7 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: '/drawbridge-app',
+      publicPath: process.env.PUBLIC_PATH || '/',
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -194,7 +194,7 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'drawbrdige'
+        appId: 'drawbridge'
       }
     },
 

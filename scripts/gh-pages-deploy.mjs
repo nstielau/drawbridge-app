@@ -7,7 +7,7 @@ import fs from 'fs'
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
     // eslint-disable-next-line no-console
     console.log("Building started...");
-    await execa("npm", ["run", "build"]);
+    await execa("npm", ["run", "build"], { env: { ...process.env, PUBLIC_PATH: '/drawbridge-app' } });
     // Understand if it's dist or build folder
     const folderName = fs.existsSync("dist") ? "dist" : "build";
     await execa("git", ["--work-tree", folderName, "add", "--all"]);

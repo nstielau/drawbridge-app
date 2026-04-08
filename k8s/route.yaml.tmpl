@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: drawbridge
+spec:
+  host: ${ROUTE_HOST}
+  to:
+    kind: Service
+    name: drawbridge
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

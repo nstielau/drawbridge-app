@@ -21,6 +21,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Kubernetes local overrides and generated files
+k8s/*.local.yaml
+k8s/deployment.yaml
+k8s/route.yaml
+k8s/.env
+
 # Editor directories and files
 .idea
 *.suo

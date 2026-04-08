@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drawbridge
+  labels:
+    app: drawbridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drawbridge
+  template:
+    metadata:
+      labels:
+        app: drawbridge
+    spec:
+      containers:
+      - name: drawbridge
+        image: ${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT}/drawbridge/drawbridge:${IMAGE_TAG}
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
